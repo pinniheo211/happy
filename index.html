@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.html">
+    <style>
+        body{
+            background: #000;
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            color:#fff;
+        }
+        #countdown{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            color:#fff;
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+
+        .link{
+            padding: 10px 20px;
+            background-color: #f18833;
+            border-radius: 10px;;
+        }
+        .link a{
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <table id="countdown">
+        <tr id="countdown-timer">
+            <td><span id="days">x</span></td>
+            <td><span id="hours">x</span></td>
+            <td><span id="minutes">x</span></td>
+            <td><span id="seconds">x</span></td>
+        </tr>
+        <tr id="countdown-labels">
+            <td><span>Days</span></td>
+            <td><span>Hours</span></td>
+            <td><span>Minutes</span></td>
+            <td><span>Seconds</span></td>
+        </tr>
+
+    </table>
+    <a class="link" href="./happy.html">
+        Click here!!
+    </a>
+</body>
+<script>
+    const storeOpening = new Date('jan 01, 2023 00:00:00');
+
+setCountdown(storeOpening); // Calls setCoundown once
+
+setInterval(function(){
+
+    setCountdown(storeOpening);
+},1000)
+
+
+function setCountdown(countingDownTime) {
+
+    let now = new Date();
+
+    let timeRemaining = countingDownTime - now;
+
+    console.log(timeRemaining); // timeRemaining is time left in milliseconds!
+ // Seconds
+ let seconds = Math.floor(timeRemaining / 1000);
+    // Minutes
+    let minutes = Math.floor(timeRemaining / (1000*60));
+    // Hours 
+    let hours = Math.floor(timeRemaining / (1000*60*60));
+    // Days
+    let days = Math.floor(timeRemaining / (1000*60*60*24));
+
+    console.log(days, hours, minutes, seconds); // Absolute time left in each unit!
+    let daysToDisplay = days;
+
+// Subtract 24 hours for every day remaining from the hour count
+let hoursToDisplay = hours - (days * 24);
+// Subtract 60 minutes for every hour remaining from the minute count
+let minutesToDisplay = minutes - ( hours * 60 );
+// Subtract 60 seconds for every minute remaining from the seconds count
+let secondsToDisplay = seconds - ( minutes * 60 );
+
+console.log(daysToDisplay, hoursToDisplay, minutesToDisplay, secondsToDisplay);
+// Countdown now in displayable format!
+ // Print to DOM
+ const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+
+    daysEl.textContent = daysToDisplay;
+    hoursEl.textContent = hoursToDisplay;
+    minutesEl.textContent = minutesToDisplay;
+    secondsEl.textContent = secondsToDisplay;
+
+}
+
+</script>
+</html>
